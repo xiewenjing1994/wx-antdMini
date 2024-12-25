@@ -1,4 +1,7 @@
 // index.ts
+import Request from '../../utils/request';
+import {Login} from "../../../typings/types/login";
+
 // 获取应用实例
 const app = getApp<IAppOption>()
 const defaultAvatarUrl = 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png'
@@ -44,10 +47,19 @@ Component({
       })
     },
     onEnterButtonClick(e: any) {
-      if (e.detail.value || this.data.userInfo.nickName) {
-        wx.navigateTo({
-          url: '/pages/home/index'
-        });
+      const username = e.detail.value || this.data.userInfo.nickName;
+      if (username) {
+        Request.post<Login>('/login', { username: username, password: '123456' }).then(res => {
+          const { token, userInfo } = res;
+
+          console.log('token', token)
+        })
+
+
+
+        // wx.navigateTo({
+        //   url: '/pages/home/index'
+        // });
       } else {
         wx.showToast({
           title: '请输入昵称',

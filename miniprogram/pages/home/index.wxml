@@ -1,3 +1,8 @@
 <!--pages/home/index.wxml-->
-<navigation-bar title="首页" back="{{true}}" color="black" background="#FFF"></navigation-bar>
-<search-bar />
+<view>
+    <navigation-bar title="首页" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<!--  搜索框  -->
+    <search-bar />
+<!--  标题列表  -->
+
+</view>

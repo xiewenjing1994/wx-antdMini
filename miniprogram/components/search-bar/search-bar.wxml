@@ -1,0 +1,17 @@
+<view class="search-container">
+    <view class="search-bar">
+        <!-- 左侧图标 -->
+        <ant-icon type="SearchOutline" />
+        <!-- 输入框 -->
+        <ant-input
+                className="search-input"
+                placeholder="搜索"
+                placeholder-style="text-align: center; color: #aaa;"
+                onChange="onChange"
+                confirm-type="search"
+                allowClear
+                focus
+        />
+    </view>
+</view>
+

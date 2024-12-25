@@ -17,15 +17,21 @@
     "minified": false,
     "enhance": false,
     "showShadowRootInWxmlPanel": false,
-    "packNpmRelationList": [],
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./miniprogram/"
+      }
+    ],
     "ignoreUploadUnusedFiles": true,
     "compileHotReLoad": false,
-    "skylineRenderEnable": true
+    "skylineRenderEnable": true,
+    "es6": true
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {},
-  "srcMiniprogramRoot": "miniprogram/",
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
@@ -35,5 +41,6 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wx54d170186235d475"
+  "appid": "wx54d170186235d475",
+  "srcMiniprogramRoot": "miniprogram/"
 }

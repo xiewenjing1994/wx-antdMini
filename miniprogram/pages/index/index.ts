@@ -1,16 +1,15 @@
 // index.ts
 // 获取应用实例
 const app = getApp<IAppOption>()
-const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
+const defaultAvatarUrl = 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png'
 
 Component({
   data: {
-    motto: 'Hello World',
+    motto: '前端技术总结',
     userInfo: {
       avatarUrl: defaultAvatarUrl,
       nickName: '',
     },
-    hasUserInfo: false,
     canIUseGetUserProfile: wx.canIUse('getUserProfile'),
     canIUseNicknameComp: wx.canIUse('input.type.nickname'),
   },
@@ -23,18 +22,14 @@ Component({
     },
     onChooseAvatar(e: any) {
       const { avatarUrl } = e.detail
-      const { nickName } = this.data.userInfo
       this.setData({
         "userInfo.avatarUrl": avatarUrl,
-        hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
       })
     },
     onInputChange(e: any) {
       const nickName = e.detail.value
-      const { avatarUrl } = this.data.userInfo
       this.setData({
         "userInfo.nickName": nickName,
-        hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
       })
     },
     getUserProfile() {
@@ -42,13 +37,23 @@ Component({
       wx.getUserProfile({
         desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
         success: (res) => {
-          console.log(res)
           this.setData({
             userInfo: res.userInfo,
-            hasUserInfo: true
           })
         }
       })
     },
+    onEnterButtonClick(e: any) {
+      if (e.detail.value || this.data.userInfo.nickName) {
+        wx.navigateTo({
+          url: '/pages/home/index'
+        });
+      } else {
+        wx.showToast({
+          title: '请输入昵称',
+          icon: 'none',
+        });
+      }
+    }
   },
 })

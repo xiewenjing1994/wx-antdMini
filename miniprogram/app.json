@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/home/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -18,5 +19,9 @@
   },
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {
+    "ant-input": "miniprogram_npm/antd-mini/Input/index",
+    "ant-icon": "miniprogram_npm/antd-mini/Icon/index"
+  }
 }

@@ -26,11 +26,11 @@ export default class Request {
         url: string,
         data: Record<string, any> = {}
     ): Promise<ResponseData<T>> {
-        return new Promise((resolve, reject) => {
+        return new Promise<ResponseData<T>>((resolve, reject) => {
             // 获取 token
             const token = Storage.get(this.TOKEN_KEY);
             // 配置请求参数
-            const options: WechatMiniprogram.RequestOption = {
+            const options: WechatMiniprogram.RequestOption<ResponseData<T>> = {
                 url: this.BASE_URL + url,
                 method,
                 data,
@@ -38,11 +38,11 @@ export default class Request {
                     Authorization: token ? `Bearer ${token}` : '',
                     'Content-Type': 'application/json',
                 },
-                success: (res) => {
-                    const { statusCode, data }: { statusCode: number, data: ResponseData } = res || {};
-                    let { success, message, data: resData } = data || {};
+                success: (res: WechatMiniprogram.RequestSuccessCallbackResult<ResponseData<T>>) => {
+                    const { statusCode, data }= res || {};
+                    let { success, message } = data || {};
                     if (statusCode === 200 && success) {
-                        resolve(resData as T);
+                        resolve(data);
                     } else {
                         // 报错提示
                         Message.showMessage({

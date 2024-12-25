@@ -50,7 +50,7 @@ Component({
       const username = e.detail.value || this.data.userInfo.nickName;
       if (username) {
         Request.post<Login>('/login', { username: username, password: '123456' }).then(res => {
-          const { token, userInfo } = res;
+          const { token, userInfo } = res.data;
 
           console.log('token', token)
         })

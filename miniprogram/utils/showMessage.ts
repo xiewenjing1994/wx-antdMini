@@ -1,6 +1,6 @@
 interface ShowMessageOptions {
     title?: string; // 标题，仅适用于 showModal
-    message: string; // 提示内容
+    message: string | undefined; // 提示内容
     showCancel?: boolean; // 是否显示取消按钮，适用于 showModal
     confirmText?: string; // 确认按钮文字，适用于 showModal
     cancelText?: string; // 取消按钮文字，适用于 showModal
@@ -12,7 +12,7 @@ interface ShowMessageOptions {
 class Message {
     private isToastVisible: boolean; // 防抖标志
 
-    private constructor() {
+    constructor() {
         this.isToastVisible = false;
     }
 
@@ -70,5 +70,4 @@ class Message {
         }
     }
 }
-
 export default new Message();

@@ -1,0 +1,3 @@
+<!--pages/home/index.wxml-->
+<navigation-bar title="首页" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<search-bar />

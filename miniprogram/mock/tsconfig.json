@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                   // 编译目标
+    "module": "commonjs",              // 模块化规范
+    "strict": true,                    // 启用严格模式
+    "esModuleInterop": true,           // 允许默认导入 CommonJS 模块
+    "skipLibCheck": true,              // 跳过库文件的类型检查
+    "outDir": "./dist",                // 编译后的输出目录
+    "rootDir": "./"                    // 项目的根目录
+  },
+  "include": ["**/*.ts"],              // 包含所有 .ts 文件
+  "exclude": ["node_modules"]          // 排除 node_modules
+}

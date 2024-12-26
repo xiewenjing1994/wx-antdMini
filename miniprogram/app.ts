@@ -1,4 +1,6 @@
 // app.ts
+import {ServiceManager} from "./utils/service/serviceManager";
+
 App<IAppOption>({
   globalData: {},
   onLaunch() {
@@ -14,5 +16,9 @@ App<IAppOption>({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       },
     })
+
+
+    // 注册服务
+    ServiceManager.initRegister()
   },
 })

@@ -1,8 +1,8 @@
 import {RequestService} from "./requestService";
-import {Storage} from "../storage";
-import Message from "../showMessage";
+import {Storage} from "../../storage";
+import Message from "../../showMessage";
 
-export class RequestImpl<T> implements RequestService<T> {
+export class RequestImpl implements RequestService {
     private readonly BASE_URL: string; // 后端接口地址
     private readonly TOKEN_KEY: string; // 存储 token 的键
     constructor() {
@@ -11,19 +11,22 @@ export class RequestImpl<T> implements RequestService<T> {
     }
 
     // 统一处理 GET 请求
-     get<T>(url: string, params: Record<string, any> = {}): Promise<Request.ResponseData<T>> {
+    get<T>(url: string, params: Record<string, any> = {}): Promise<Request.ResponseData<T>> {
         return this.request<T>('GET', url, params);
     }
+
     // 统一处理 POST 请求
-     post<T>(url: string, data: Record<string, any> = {}): Promise<Request.ResponseData<T>> {
+    post<T>(url: string, data: Record<string, any> = {}): Promise<Request.ResponseData<T>> {
         return this.request<T>('POST', url, data);
     }
+
     // 统一处理 PUT 请求
     put<T>(url: string, data: Record<string, any> = {}): Promise<Request.ResponseData<T>> {
         return this.request<T>('PUT', url, data);
     }
+
     // 内部请求方法
-    private  request<T>(
+    private request<T>(
         method: 'GET' | 'POST' | 'PUT',
         url: string,
         data: Record<string, any> = {}
@@ -41,8 +44,8 @@ export class RequestImpl<T> implements RequestService<T> {
                     'Content-Type': 'application/json',
                 },
                 success: (res: WechatMiniprogram.RequestSuccessCallbackResult<Request.ResponseData<T>>) => {
-                    const { statusCode, data }= res || {};
-                    let { success, message } = data || {};
+                    const {statusCode, data} = res || {};
+                    let {success, message} = data || {};
                     if (statusCode === 200 && success) {
                         resolve(data);
                     } else {

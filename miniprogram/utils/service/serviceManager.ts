@@ -91,3 +91,13 @@ export enum ServiceKey {
     REQUEST_SERVICE_KEY = "request"
     // 可以不断添加其他的服务标识字段
 }
+
+// export const request = ServiceManager.getIns().getRequestService()!;
+export const request = (): RequestService => {
+    const service = ServiceManager.getIns().getRequestService()!;
+    console.log('service', service)
+    if (!service) {
+        throw new Error("RequestService 尚未初始化，请确保已调用 ServiceManager.initRegister()");
+    }
+    return service;
+};

@@ -1,13 +1,12 @@
 import {RequestService} from "./requestService";
 import {Storage} from "../../storage";
 import Message from "../../showMessage";
+import {StorageKeys} from "../../../constants/storageKeys";
 
 export class RequestImpl implements RequestService {
     private readonly BASE_URL: string; // 后端接口地址
-    private readonly TOKEN_KEY: string; // 存储 token 的键
     constructor() {
         this.BASE_URL = 'http://localhost:8080'; // 后端接口地址
-        this.TOKEN_KEY = 'token'; // 后端接口地址
     }
 
     // 统一处理 GET 请求
@@ -33,7 +32,7 @@ export class RequestImpl implements RequestService {
     ): Promise<Request.ResponseData<T>> {
         return new Promise<Request.ResponseData<T>>((resolve, reject) => {
             // 获取 token
-            const token = Storage.get(this.TOKEN_KEY);
+            const token = Storage.get(StorageKeys.TOKEN);
             // 配置请求参数
             const options: WechatMiniprogram.RequestOption<Request.ResponseData<T>> = {
                 url: this.BASE_URL + url,

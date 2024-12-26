@@ -1,7 +1,8 @@
 // index.ts
-import Request from '../../utils/request';
 import {Login} from "../../../typings/types/login";
-import {ServiceManager} from "../../utils/service/serviceManager";
+import {request} from "../../utils/service/serviceManager";
+import {Storage} from "../../utils/storage";
+import {StorageKeys} from "../../constants/storageKeys";
 
 // 获取应用实例
 // @ts-ignore
@@ -51,33 +52,17 @@ Component({
     onEnterButtonClick(e: any) {
       const username = e.detail.value || this.data.userInfo.nickName;
       if (username) {
-        // request.post<Login>('/login', { username: username, password: '123456' }).then(res => {
-        //   const { token, userInfo } = res.data;
-        //
-        //   console.log('token', token)
-        // })
-
-        ServiceManager.getIns().getRequestService()?.post<Login>('/login', { username: username, password: '123456' }).then(res => {
-          const { token, userInfo } = res.data;
-
-          console.log('token', token)
-          console.log('userInfo', userInfo)
+        request().post<Login>('/login', { username: username, password: '123456' }).then(res => {
+          const { token, userInfo } = res?.data;
+          if (token) {
+            Storage.set(StorageKeys.TOKEN, token);
+            Storage.set(StorageKeys.USER_INFO, userInfo);
+            wx.navigateTo({
+              url: '/pages/home/index'
+            });
+          }
         })
 
-        Request.post<Login>('/login', { username: username, password: '123456' }).then(res => {
-          const { token, userInfo } = res.data;
-
-          console.log('token', token)
-          console.log('userInfo', userInfo)
-        })
-
-
-
-
-
-        // wx.navigateTo({
-        //   url: '/pages/home/index'
-        // });
       } else {
         wx.showToast({
           title: '请输入昵称',

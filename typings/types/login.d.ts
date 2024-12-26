@@ -1,6 +1,6 @@
 export interface Login {
     token: string;
-    userInfo: UserInfo
+    userInfo: UserInfo;
 }
 
 interface UserInfo {

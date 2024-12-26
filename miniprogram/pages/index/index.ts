@@ -1,6 +1,7 @@
 // index.ts
 import Request from '../../utils/request';
 import {Login} from "../../../typings/types/login";
+import request from "../../utils/service/request";
 
 // 获取应用实例
 const app = getApp<IAppOption>()
@@ -49,11 +50,19 @@ Component({
     onEnterButtonClick(e: any) {
       const username = e.detail.value || this.data.userInfo.nickName;
       if (username) {
+        request.post<Login>('/login', { username: username, password: '123456' }).then(res => {
+          const { token, userInfo } = res.data;
+
+          console.log('token', token)
+        })
+
         Request.post<Login>('/login', { username: username, password: '123456' }).then(res => {
           const { token, userInfo } = res.data;
 
           console.log('token', token)
         })
+
+
 
 
 

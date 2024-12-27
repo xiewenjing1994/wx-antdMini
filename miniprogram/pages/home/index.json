@@ -2,5 +2,6 @@
   "usingComponents": {
     "navigation-bar": "/components/navigation-bar/navigation-bar",
     "search-bar": "/components/search-bar/search-bar"
-  }
+  },
+  "styleIsolation": "shared"
 }

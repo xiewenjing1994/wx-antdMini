@@ -1,11 +1,50 @@
 // pages/home/index.ts
+const lists = [
+  {
+    title: 'HTML',
+    icon: '/static/icon/html.svg',
+  },
+  {
+    title: 'CSS/LESS/SCSS',
+    icon: '/static/icon/css.svg',
+  },
+  {
+    title: 'JavaScript',
+    icon: '/static/icon/javaScript.svg',
+  },
+  {
+    title: 'TypeScript',
+    icon: '/static/icon/typescript.svg',
+  },
+  {
+    title: 'React',
+    icon: '/static/icon/react.svg',
+  },
+  {
+    title: 'Vue',
+    icon: '/static/icon/vue.svg',
+  },
+  {
+    title: 'WX MiniProgram',
+    icon: '/static/icon/wxMiniProgram.svg',
+  },
+  {
+    title: '算法',
+    icon: '/static/icon/algorithm.svg',
+  },
+  {
+    title: '设计模式',
+    icon: '/static/icon/designMode.svg',
+  },
+];
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    lists
   },
 
   /**

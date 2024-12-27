@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/home/index"
+    "pages/home/index",
+    "pages/questionBank/index",
+    "pages/my/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -22,6 +24,33 @@
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
     "ant-input": "miniprogram_npm/antd-mini/Input/index",
-    "ant-icon": "miniprogram_npm/antd-mini/Icon/index"
+    "ant-icon": "miniprogram_npm/antd-mini/Icon/index",
+    "ant-grid": "miniprogram_npm/antd-mini/Grid/index"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "/static/icon/home-outlined.png",
+        "selectedIconPath": "/static/icon/home-filled.png"
+      },
+      {
+        "pagePath": "pages/questionBank/index",
+        "text": "题库",
+        "iconPath": "/static/icon/questionBank-outlined.png",
+        "selectedIconPath": "/static/icon/questionBank-filled.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "/static/icon/my-outlined.png",
+        "selectedIconPath": "/static/icon/my-filled.png"
+      }
+    ]
   }
 }

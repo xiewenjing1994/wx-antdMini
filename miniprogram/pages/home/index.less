@@ -1,1 +1,36 @@
 /* pages/home/index.wxss */
+.list-box {
+  display: flex;
+  flex-wrap: wrap; /* 自动换行 */
+  justify-content: space-between; /* 每行元素之间保持间隔 */
+  background-color: #f5f5f5; /* 背景色作为间隔线颜色 */
+  padding: 10px; /* 整体的内边距 */
+  box-sizing: border-box;
+}
+
+/* 每个 item 的样式 */
+.grid-item {
+  width: calc(33.33% - 2px); /* 每个 item 的宽度，减去间隔 */
+  background-color: #ffffff; /* 格子的背景色 */
+  margin-bottom: 2px; /* 下方间隔 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box; /* 防止内边距影响布局 */
+}
+
+/* 图标样式 */
+.icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 10px;
+}
+
+/* 标题样式 */
+.title {
+  font-size: 14px;
+  color: #333333;
+  text-align: center;
+}

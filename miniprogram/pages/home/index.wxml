@@ -1,8 +1,16 @@
 <!--pages/home/index.wxml-->
 <view>
     <navigation-bar title="首页" back="{{true}}" color="black" background="#FFF"></navigation-bar>
-<!--  搜索框  -->
+    <!--  搜索框  -->
     <search-bar />
-<!--  标题列表  -->
+    <!--  标题列表  -->
+    <view class="list-box">
+        <block wx:for="{{lists}}" wx:key="title">
+            <view class="grid-item">
+                <image class="icon" src="{{item.icon}}" mode="aspectFit"></image>
+                <text class="title">{{item.title}}</text>
+            </view>
+        </block>
+    </view>
 
 </view>

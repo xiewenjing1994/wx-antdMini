@@ -1,13 +1,15 @@
 import {RequestService} from "./requestService";
 import Message from "../../showMessage";
 import {StorageKeys} from "../../../constants/storageKeys";
-import {storage} from "../serviceManager";
+import {ServiceKey, storage} from "../serviceManager";
 
 export class RequestImpl implements RequestService {
     private readonly BASE_URL: string; // 后端接口地址
     constructor() {
         this.BASE_URL = 'http://localhost:8080'; // 后端接口地址
     }
+
+    serviceKey: string = ServiceKey.REQUEST_SERVICE_KEY;
 
     // 统一处理 GET 请求
     get<T>(url: string, params: Record<string, any> = {}): Promise<Request.ResponseData<T>> {

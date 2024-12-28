@@ -1,6 +1,9 @@
 import {StorageService} from "./storageService";
+import {ServiceKey} from "../serviceManager";
 
 export class StorageImpl implements StorageService {
+
+    serviceKey: string = ServiceKey.STORAGE_SERVICE_KEY;
 
 
     // 设置本地存储

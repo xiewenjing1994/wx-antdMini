@@ -16,10 +16,10 @@ class ServiceManager {
 
     /**
      * 注册一个服务实例
-     * @param key 服务标识符
      * @param instance 服务实例
      */
-    private registerService(key: string, instance: IService): void {
+    private registerService(instance: IService): void {
+        const key = instance.serviceKey
         if (this.services.has(key)) {
             throw new Error(`服务 "${key}" 已经注册.`);
         }
@@ -64,7 +64,7 @@ class ServiceManager {
      */
     public getRequestService(): RequestService {
         if (!this.hasService(ServiceKey.REQUEST_SERVICE_KEY)) {
-            this.registerService(ServiceKey.REQUEST_SERVICE_KEY, new RequestImpl())
+            this.registerService(new RequestImpl())
         }
         return this.getService(ServiceKey.REQUEST_SERVICE_KEY) as RequestService;
     }
@@ -76,7 +76,7 @@ class ServiceManager {
      */
     getStorageService(): StorageService {
         if (!this.hasService(ServiceKey.STORAGE_SERVICE_KEY)) {
-            this.registerService(ServiceKey.STORAGE_SERVICE_KEY, new StorageImpl())
+            this.registerService(new StorageImpl())
         }
         return this.getService(ServiceKey.STORAGE_SERVICE_KEY)! as StorageService;
     }

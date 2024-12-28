@@ -53,7 +53,7 @@ Component({
     onEnterButtonClick(e: any) {
       const username = e.detail.value || this.data.userInfo.nickName;
       if (username) {
-        request().post<Login>('/login', { username, password: '123456' }).then(res => {
+        request.post<Login>('/login', { username, password: '123456' }).then(res => {
           const { token, userInfo } = res?.data;
           if (token) {
             Storage.set(StorageKeys.TOKEN, token);

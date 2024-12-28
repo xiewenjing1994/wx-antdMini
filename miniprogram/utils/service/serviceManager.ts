@@ -1,36 +1,15 @@
 // 服务层管理类（单例模式）
 import {RequestService} from "./request/requestService";
 import {RequestImpl} from "./request/requestImpl";
+import {IService} from "./service";
 
-export class ServiceManager {
-    // 单例实例
-    private static instance: ServiceManager;
+class ServiceManager implements IService {
 
     // 存储服务实例的 Map
     private services: Map<string, any>;
 
-    private constructor() {
+    constructor() {
         this.services = new Map();
-    }
-
-    /**
-     * 首次初始化的时候注册服务，在app.js中调用
-     */
-    public static initRegister() {
-        ServiceManager.getIns().registerService(ServiceKey.REQUEST_SERVICE_KEY, new RequestImpl())
-
-        // 后续不断添加注册各种服务。
-    }
-
-    /**
-     * 获取 ServiceManager 单例实例
-     * @returns ServiceManager 实例
-     */
-    public static getIns(): ServiceManager {
-        if (!ServiceManager.instance) {
-            ServiceManager.instance = new ServiceManager();
-        }
-        return ServiceManager.instance;
     }
 
     /**
@@ -81,9 +60,13 @@ export class ServiceManager {
      * 获取网络服务实例
      * @returns RequestService 实例
      */
-    public getRequestService(): RequestService | null {
-        return this.getService(ServiceKey.REQUEST_SERVICE_KEY);
+    public getRequestService(): RequestService {
+        if (!this.hasService(ServiceKey.REQUEST_SERVICE_KEY)) {
+            this.registerService(ServiceKey.REQUEST_SERVICE_KEY, new RequestImpl())
+        }
+        return this.getService(ServiceKey.REQUEST_SERVICE_KEY)!;
     }
+
 }
 
 // 服务标识符常量
@@ -92,12 +75,6 @@ export enum ServiceKey {
     // 可以不断添加其他的服务标识字段
 }
 
-// export const request = ServiceManager.getIns().getRequestService()!;
-export const request = (): RequestService => {
-    const service = ServiceManager.getIns().getRequestService()!;
-    console.log('service', service)
-    if (!service) {
-        throw new Error("RequestService 尚未初始化，请确保已调用 ServiceManager.initRegister()");
-    }
-    return service;
-};
+const server: IService = new ServiceManager()
+export const request = server.getRequestService()
+

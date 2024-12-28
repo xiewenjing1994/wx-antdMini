@@ -8,7 +8,7 @@ import {IService} from "./service";
 class ServiceManager {
 
     // 存储服务实例的 Map
-    private services: Map<string, any>;
+    private services: Map<string, IService>;
 
     constructor() {
         this.services = new Map();

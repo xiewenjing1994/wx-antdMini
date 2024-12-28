@@ -1,4 +1,6 @@
-export interface RequestService {
+import {IService} from "../service";
+
+export interface RequestService extends IService {
     /**
      * get请求
      * @param url     // 记得写注释

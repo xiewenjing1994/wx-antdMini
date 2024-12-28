@@ -1,7 +1,6 @@
 // index.ts
 import {Login} from "../../../typings/types/login";
-import {request} from "../../utils/service/serviceManager";
-import {Storage} from "../../utils/storage";
+import {request, storage} from "../../utils/service/serviceManager";
 import {StorageKeys} from "../../constants/storageKeys";
 import Message from "../../utils/showMessage";
 
@@ -56,8 +55,8 @@ Component({
         request.post<Login>('/login', { username, password: '123456' }).then(res => {
           const { token, userInfo } = res?.data;
           if (token) {
-            Storage.set(StorageKeys.TOKEN, token);
-            Storage.set(StorageKeys.USER_INFO, userInfo);
+            storage.set(StorageKeys.TOKEN, token);
+            storage.set(StorageKeys.USER_INFO, userInfo);
             wx.switchTab({
               url: '/pages/home/index'
             });

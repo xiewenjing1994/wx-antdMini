@@ -1,7 +1,7 @@
 // utils/request.ts
-import {Storage} from "./storage";
 import Message from "./showMessage";
 import {StorageKeys} from "../constants/storageKeys";
+import {storage} from "./service/serviceManager";
 
 interface ResponseData<T = any> {
     success: boolean;
@@ -15,6 +15,7 @@ export default class Request {
     static get<T>(url: string, params: Record<string, any> = {}): Promise<ResponseData<T>> {
         return this.request<T>('GET', url, params);
     }
+
     // 统一处理 POST 请求
     static post<T>(url: string, data: Record<string, any> = {}): Promise<ResponseData<T>> {
         return this.request<T>('POST', url, data);
@@ -28,7 +29,7 @@ export default class Request {
     ): Promise<ResponseData<T>> {
         return new Promise<ResponseData<T>>((resolve, reject) => {
             // 获取 token
-            const token = Storage.get(StorageKeys.TOKEN);
+            const token = storage.get(StorageKeys.TOKEN);
             // 配置请求参数
             const options: WechatMiniprogram.RequestOption<ResponseData<T>> = {
                 url: this.BASE_URL + url,
@@ -39,8 +40,8 @@ export default class Request {
                     'Content-Type': 'application/json',
                 },
                 success: (res: WechatMiniprogram.RequestSuccessCallbackResult<ResponseData<T>>) => {
-                    const { statusCode, data }= res || {};
-                    let { success, message } = data || {};
+                    const {statusCode, data} = res || {};
+                    let {success, message} = data || {};
                     if (statusCode === 200 && success) {
                         resolve(data);
                     } else {

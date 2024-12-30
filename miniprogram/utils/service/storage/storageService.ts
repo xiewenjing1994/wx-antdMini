@@ -22,7 +22,7 @@ export interface StorageService extends IService {
     removeItem(key: string): void
 
     /**
-     * 清楚怇
+     * 清除数据
      */
     clear(): void
 }

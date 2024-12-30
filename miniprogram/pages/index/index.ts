@@ -52,17 +52,23 @@ Component({
     onEnterButtonClick(e: any) {
       const username = e.detail.value || this.data.userInfo.nickName;
       if (username) {
-        request.post<Login>('/login', { username, password: '123456' }).then(res => {
-          const { token, userInfo } = res?.data;
-          if (token) {
-            storage.set(StorageKeys.TOKEN, token);
-            storage.set(StorageKeys.USER_INFO, userInfo);
-            wx.switchTab({
-              url: '/pages/home/index'
-            });
-          }
+        // 登录(获取登录凭证 code)
+        wx.login({
+          success: res => {
+            console.log(res.code)
+            // 发送 res.code 到后台换取 openId, sessionKey, unionId
+            request.post<Login>('/login', { username, password: '123456', code: res.code }).then(res => {
+              const { token, userInfo } = res?.data;
+              if (token) {
+                storage.set(StorageKeys.TOKEN, token);
+                storage.set(StorageKeys.USER_INFO, userInfo);
+                wx.switchTab({
+                  url: '/pages/home/index'
+                });
+              }
+            })
+          },
         })
-
       } else {
         Message.showMessage({
           message: '请输入昵称',
